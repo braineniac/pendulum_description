@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>inv_pendulum_description</name>
+  <name>pendulum_description</name>
   <version>0.0.1</version>
-  <description>Setups with inverse pendulums</description>
+  <description>Setups with pendulums</description>
 
   <maintainer email="braineniac@protonmail.com">Daniel Hammer</maintainer>
 
   <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
   <build_depend>xacro</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>xacro</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
   <exec_depend>xacro</exec_depend>
 
   <export>

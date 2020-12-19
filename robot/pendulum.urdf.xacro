@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="pendulum">
+
+
+    <xacro:include filename="$(find xacro_common)/common.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/constants.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/gazebo.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/links.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/joints.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/inertials.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/materials.urdf.xacro"/>
+    <xacro:include filename="$(find xacro_common)/transmissions.urdf.xacro"/>
+
+    <xacro:include filename="$(find pendulum_description)/urdf/pendulum/pendulum.urdf.xacro"/>
+
+    <xacro:property name="effort" value="1000"/>
+    <xacro:property name="velocity" value="50"/>
+    <xacro:property name="damping" value="0.7"/>
+
+    <xacro:property name="mu1" value="100"/>
+    <xacro:property name="mu2" value="100"/>
+
+    <xacro:property name="joint_cylinder_r" value="0.02"/>
+    <xacro:property name="joint_cylinder_l" value="0.1"/>
+
+    <xacro:property name="pendulum_r" value="0.03"/>
+    <xacro:property name="pendulum_l" value="0.5"/>
+
+    <xacro:world/>
+    <xacro:base/>
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+    </joint>
+
+    <xacro:pendulum prefix="pendulum" parent="base"/>
+
+        <!-- Gazebo plugin for ROS Control -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/pendulum</robotNamespace>
+        </plugin>
+    </gazebo>
+
+
+</robot>

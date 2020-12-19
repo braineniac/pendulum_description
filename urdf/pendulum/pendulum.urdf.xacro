@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+    <xacro:macro name="pendulum" params="prefix parent">
+
+
+        <xacro:solid_cylinder_link prefix="${prefix}_roll" rho="${rho_Fe}" r="${joint_cylinder_r}" l="${joint_cylinder_l}">
+            <xacro:rot_x_origin/>
+            <material name="yellow"/>
+        </xacro:solid_cylinder_link>
+
+        <xacro:rot_joint parent="${parent}" child="${prefix}_roll"
+                effort="${effort}" velocity="${velocity}" damping="${damping}">
+            <origin xyz="0 0 ${joint_cylinder_r}"/>
+            <axis xyz="1 0 0"/>
+        </xacro:rot_joint>
+
+        <xacro:effort_trans parent="${parent}" child="${prefix}_roll"/>
+
+        <xacro:gaz_link prefix="${prefix}_roll" material="Gazebo/Yellow" mu1="${mu1}" mu2="${mu2}"/>
+
+
+        <xacro:solid_cylinder_link prefix="${prefix}" rho="${rho_Fe}" r="${pendulum_r}" l="${pendulum_l}">
+            <xacro:default_origin/>
+            <material name="red"/>
+        </xacro:solid_cylinder_link>
+
+        <xacro:fixed_joint parent="${prefix}_roll" child="${prefix}">
+            <origin xyz="0 0 ${joint_cylinder_r+pendulum_l/2}"/>
+        </xacro:fixed_joint>
+
+        <xacro:gaz_link prefix="${prefix}" material="Gazebo/Red" mu1="${mu1}" mu2="${mu2}"/>
+
+
+    </xacro:macro>
+
+
+</robot>

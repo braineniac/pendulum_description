@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(inv_pendulum_description)
+project(pendulum_description)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -7,7 +7,9 @@ project(inv_pendulum_description)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -113,7 +115,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-# ${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -183,7 +185,7 @@ include_directories(
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 install(DIRECTORY
-  urdf
+  launch urdf robot config
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
